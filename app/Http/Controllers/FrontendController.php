@@ -46,6 +46,7 @@ class FrontendController extends Controller
 
     public function getFromSlug($slug)
     {
+        dd($slug);
         abort_if(PageType::query()->where('slug', $slug)->count() == 0, 404);
         if($slug=='article')
         {
@@ -70,7 +71,6 @@ class FrontendController extends Controller
                 ->with('pictures','Parents.pictures')
                 ->orderBy('id','DESC')
                 ->paginate(4);
-
 
             return view('frontend.'.$slug, [
                 'pages' => $this->pages->load('pages.pictures','pages.Parents'),
