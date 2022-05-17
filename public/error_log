@@ -1,0 +1,14 @@
+[13-Apr-2022 04:01:29 America/Chicago] PHP Fatal error:  Uncaught Error: Class 'Artisan' not found in /home2/adarshaschooledu/public_html/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home2/adarshaschooledu/public_html/public/index.php on line 17
+[13-Apr-2022 04:01:30 America/Chicago] PHP Fatal error:  Uncaught Error: Class 'Artisan' not found in /home2/adarshaschooledu/public_html/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home2/adarshaschooledu/public_html/public/index.php on line 17
+[13-Apr-2022 04:06:40 America/Chicago] PHP Warning:  file_get_contents(): Filename cannot be empty in /home2/adarshaschooledu/public_html/storage/framework/maintenance.php on line 9
+[20-Apr-2022 04:49:11 UTC] PHP Fatal error:  Cannot use App\Http\Controllers\Auth\StudentsController as StudentsController because the name is already in use in /home2/adarshaschooledu/public_html/website/routes/web.php on line 18
+[20-Apr-2022 05:17:11 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home2/adarshaschooledu/public_html/website/storage/framework/views/6153320f6b9f3b8c979cc0dda91636c8df78bce3.php on line 35
+[21-Apr-2022 05:40:43 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home2/adarshaschooledu/public_html/website/storage/framework/views/17bf57d43f6db46b70287e3c9c14d9f616b7aa82.php on line 19
+[21-Apr-2022 05:41:50 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home2/adarshaschooledu/public_html/website/storage/framework/views/17bf57d43f6db46b70287e3c9c14d9f616b7aa82.php on line 19
+[21-Apr-2022 05:42:13 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home2/adarshaschooledu/public_html/website/storage/framework/views/17bf57d43f6db46b70287e3c9c14d9f616b7aa82.php on line 19
