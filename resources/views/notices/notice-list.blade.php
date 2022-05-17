@@ -43,7 +43,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ($notice->pages as $key=> $value)
+        @foreach ($notice->pages as $key => $value)
             @php
                 $data=json_decode($value->content,true);
             @endphp

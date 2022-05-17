@@ -20,35 +20,32 @@
                           <table class="table mt-5">
                             <thead class="bg text-light">
                               <tr>
-                                <th scope="col">S.N.</th>
+                                <th scope="col">S.N. </th>
                                 <th scope="col">Title </th>
                                 <th scope="col">Download </th>
                               </tr>
                             </thead>
                                 
                             <tbody>
-                            @foreach ($pages as $item)
+                            @foreach ($datas as $key => $item)
                             @php
                             @endphp
-                           @if ($item->title=='RESULT')
-                          @foreach ($item->pages as $key=> $value)
+                   
                           @php
-                              $content=json_decode($value->content,true);
-                             
+                              $content=json_decode($item->content,true);
                           @endphp
                               <tr>
-                                <td class="w-5">{{$key+1}}</td>
+                                <td>{{$datas->firstItem()+$key}}</td>
                                 <td>{{isset($content[0]['title']) ? $content[0]['title'] : ''}}</td>
                                 <td class="w-5 text-center"> <a href="{{route('downloadFile',$content['RealFile'])}} "> <i class="fa-solid fa-download"></i> </a> </td>
                               </tr>
-                          @endforeach
-                           @endif
-
                           @endforeach
                            
                            
                             </tbody>
                           </table>
+                          {{ $datas->links() }}
+
 
                       </div>
                   </div>

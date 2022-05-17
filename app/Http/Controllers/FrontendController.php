@@ -24,14 +24,12 @@ class FrontendController extends Controller
     public function home()
     {
         $pages = PageType::query()->with('pages.pictures','pages.Parents')->get();
-       
-      
-       
+
+        $notice= Page::query()->where('page_type_id',5)->take(3)->orderBy('id','DESC')->get();
         if (visitor::query()->where('ip', request()->ip())->count() == 0) {
             visitor::create(['ip' => request()->ip()]);
         }
-
-        return view('frontend.frontend',['pages'=>$pages]); 
+        return view('frontend.frontend',['pages'=>$pages,'notice'=>$notice]); 
     }
 
     public function generalNotice($slug)
@@ -48,37 +46,59 @@ class FrontendController extends Controller
 
     public function getFromSlug($slug)
     {
-       
         abort_if(PageType::query()->where('slug', $slug)->count() == 0, 404);
-        
-        
         if($slug=='article')
         {
             $latestArticle= Page::query()->where('page_type_id',14)->latest()->first();
-            $allArticle= Page::query()->where('page_type_id',14)->orderBy('id','DESC')->get();
+            $allArticle= Page::query()->where('page_type_id',14)->orderBy('id','DESC')->paginate(10);
              $pages = PageType::query()
             ->with('pages.pictures')
             ->get();
-            return view('frontend.article',['latestArticle'=>$latestArticle,'allArticle'=>$allArticle,'pages'=>$pages,'slug'=>$slug]);
+            return view('frontend.article',[
+                'latestArticle'=>$latestArticle,
+                'allArticle'=>$allArticle,
+                'pages'=>$this->pages->load('pages.pictures','pages.Parents'),
+                'slug'=>$slug
+            ]);
         }
-        
-        
-        $pages = PageType::query()
-            ->with('pages.pictures')
-            ->get();
-        return view('frontend.'.$slug, ['pages' => $pages, 'slug' => $slug]);
+
+        if ($slug=='notice-board' || $slug=='result' || $slug=='downloads') {
+            $temp = PageType::query()->where('slug',$slug)->first();
+            if ($temp!=null) {
+                $datas = Page::query()
+                ->where('page_type_id',$temp->id)
+                ->with('pictures','Parents.pictures')
+                ->orderBy('id','DESC')
+                ->paginate(4);
+
+
+            return view('frontend.'.$slug, [
+                'pages' => $this->pages->load('pages.pictures','pages.Parents'),
+                'slug' => $slug,
+                'datas'=>$datas
+            ]);
+            }
+        }
+        return view('frontend.'.$slug, ['pages' => $this->pages->load('pages.pictures','pages.Parents'), 'slug' => $slug]);
     }
 
     public function getFromProgramSlug($slug)
     {
         abort_if(!Page::query()->where('slug', $slug)->count(), 404);
-        // if ($slug=='') {
-        //     # code...
-        // }
-        $temp = Page::query()->where('slug','staff-directories')->first();
-        $paginations = Page::query()->where('page_id',$temp->id)->paginate(5);
-        $program=Page::query()->where('slug',$slug)->with('pictures','Parents.pictures')->first();
-        return view('frontend.'.$slug, ['pages' => $this->pages->load('pages.pictures','pages.Parents'), 'slug' => $slug,'program'=>$program,'paginations'=>$paginations]);
+        $program=Page::query()
+        ->where('slug',$slug)
+        ->with('pictures','Parents.pictures')
+        ->first();
+        
+        if ($slug=='instituional-overview' || $slug =='organizational-structure' || $slug =='school-management-team' || $slug=='staff-directories' || $slug=='board-members') {
+            $temp = Page::query()->where('slug',$slug)->first();
+            if ($temp!=null) {
+            $paginations = Page::query()->where('page_id',$temp->id)->with('pictures','Parents.pictures')->paginate(5);
+            return view('frontend.'.$slug, ['pages' => $this->pages->load('pages.pictures','pages.Parents'), 'slug' => $slug,'program'=>$program,'paginations'=>$paginations]);
+            }
+        }
+        
+        return view('frontend.'.$slug, ['pages' => $this->pages->load('pages.pictures','pages.Parents'), 'slug' => $slug,'program'=>$program]);
     }
 
     public function subGallery($slug)

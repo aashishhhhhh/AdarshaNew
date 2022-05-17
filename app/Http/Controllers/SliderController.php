@@ -38,7 +38,6 @@ class SliderController extends Controller
     
     public function store(Request $request,MediaHelper $mediaHelper)
     {
-        dd($request->all());
         if ($this->page==null) {
             $PageType= PageType::where('slug',$this->slug)->first();
             $title=strtoupper($this->slug);
@@ -60,7 +59,6 @@ class SliderController extends Controller
             foreach ($request->photo as $key => $image) {
                $imageName[]=$mediaHelper->uploadSingleImage($image);
             }
-
             foreach ($imageName as $key => $image) {
                 Picture::create([
                     'imageable_id'=>$this->page->id,

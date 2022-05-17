@@ -27,17 +27,12 @@
                               </tr>
                             </thead>
                             <tbody>
-                                @foreach ($pages as $item)
-                                    
-                                @if ($item->title=='DOWNLOADS')
-                                @if ($item->pages!=null)
-                                    
-                                @foreach ($item->pages as $key=> $value)
+                                @foreach ($datas as $key => $item)
                                 @php
-                                $data= json_decode($value->content,true);
+                                $data= json_decode($item->content,true);
                                  @endphp
                                <tr>
-                                <td class="w-5">{{$key+1}}</td>
+                                <td>{{$datas->firstItem() + $key }}</td>
                                 <td> {{$data[0]['title']}}</td>
                                @php
                                    $content=json_decode($item->content,true);
@@ -46,17 +41,12 @@
                                 <td class="w-5 text-center"> <a href="{{route('downloadFile',$data['RealFile'])}} "> <i class="fa-solid fa-download"></i> </a> </td>
                                 
                               </tr>
-
-                              @endforeach
-                              @endif
-
-                              @endif
-
                               @endforeach
 
                              
                             </tbody>
                           </table>
+                          {{$datas->links()}}
                       </div>
                   </div>
               </div>

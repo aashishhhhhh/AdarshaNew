@@ -31,22 +31,22 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                @foreach ($program->Parents as $item)
-                                    @php
+
+                                @foreach ($paginations as $item)
+                                @php
                                         $data=json_decode($item->content);
                                     @endphp
                                 <tr>
-                                  {{-- {{isset($item->pictures[0])) ? $item->pictures[0]) : ''}} --}}
                                   <td><img src="{{ asset('storage/upload/' . $item->pictures[0]->url) }}" alt=""
                                     class="px-1" width="100"></td>
                                   <td>{{isset($data->name) ? $data->name : ''}}</td>
                                   <td>{{isset($data->Designation) ? $data->Designation : ''}}</td>
                                 </tr>
                                 @endforeach
-
-                               
                               </tbody>
                             </table>
+                            {{ $paginations->links() }}
+
                             
                             
                       </div>

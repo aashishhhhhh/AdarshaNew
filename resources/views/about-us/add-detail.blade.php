@@ -21,6 +21,7 @@
                         <th class="text-center">{{ __('Photo') }}</th>
                         <th class="text-center">{{ __(' Name') }}</th>
                         <th class="text-center">{{ __(' Designation') }}</th>
+                        <th class="text-center">{{ __(' Contact No') }}</th>
                         <th class="text-center">{{ __(' Position') }}</th>
                         <th></th>
                     </tr>
@@ -48,6 +49,10 @@
                         <td class="text-center">
                             <input name="name[]" id="" value="{{$content->name}}" value="" class="form-control-sm form-control" readonly>
                         </td>
+
+                        @error('name')
+                            <strong style="color: red">{{$message}}</strong>
+                        @enderror
                         @endif
                         @if ($key>2)
                         <td class="text-center">
@@ -58,6 +63,22 @@
                             <input name="designation[]" id="" value="{{$content->designation}}"  class="form-control-sm form-control" readonly>
                         </td>   
                         @endif
+                        @error('designation')
+                        <strong style="color: red">{{$message}}</strong>
+                        @enderror
+
+                        @if ($key>2)
+                        <td class="text-center">
+                            <input name="contact_no[]" id="" value="{{isset($content->contact_no) ? $content->contact_no : '' }}"  class="form-control-sm form-control" >
+                        </td>
+                        @else
+                        <td class="text-center">
+                            <input name="contact_no[]" id="" value="{{isset($content->contact_no) ? $content->contact_no : '' }}"  class="form-control-sm form-control" readonly>
+                        </td>   
+                        @endif
+                        @error('contact_no')
+                        <strong style="color: red">{{$message}}</strong>
+                        @enderror
 
                         @if ($key>2)
 
@@ -69,6 +90,10 @@
                             <input name="position[]" id="" value="{{$item->position}}" class="form-control-sm form-control" readonly>
                         </td>
                         @endif
+
+                        @error('position')
+                        <strong style="color: red">{{$message}}</strong>
+                        @enderror
 
                        @if ($key>2)
                         <td>
@@ -118,6 +143,9 @@
                 '</td>' +
                 '<td class="text-center">' +
                 '<input name="designation[]" id="" class="form-control-sm form-control">' +
+                '</td>' +
+                '<td class="text-center">' +
+                '<input name="contact_no[]" id="" class="form-control-sm form-control">' +
                 '</td>' +
                 '<td class="text-center">' +
                 '<input name="position[]" id="" value="'+i+'" class="form-control-sm form-control" readonly>' +

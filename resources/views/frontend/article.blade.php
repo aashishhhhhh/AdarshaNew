@@ -55,10 +55,6 @@
                          @if($key!=0)
                          @php
                             $content= json_decode($value->content);
-                          
-                           
-                            
-                            
                          @endphp
                             <div class="col-md-4">
                               <div class="article_item2">
@@ -83,7 +79,6 @@
                                   <div class="des">
                                  
                                    {!! Str::limit($content->article_content, 50)!!}
-
                                   </div>
                                 </div>
                               </div>
@@ -91,10 +86,14 @@
                        @endif
                       @endforeach
                       </div>
-                       
                     </div>
                   </div>
                 </div>
+
+                <div style="text-align: center">
+                  {{$allArticle->links()}}
+                  </div>
+
               </div>
               <div class="col-md-4">
                 <div class="right-box">

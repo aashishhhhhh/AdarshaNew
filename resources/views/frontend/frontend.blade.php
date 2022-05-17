@@ -100,25 +100,15 @@
                         @php
                             $i=0;
                         @endphp
-                        @foreach ($pages as $item)
-                      
-                        @foreach ($item->pages as $item)
-                          @if ($item->slug=='exam')
-                          @php
-                          @endphp
-                            @if ($item->Parents!=null)
-                             @foreach ($item->Parents as $item)
-                        <div class="hitem"><a href="{{route('exam-notice',$item->slug)}}"> {{isset($item->title) ? $item->title : ''}}
-                        </a></div>
-                        @if ($i==5)
-                            @php
-                              break;
-                            @endphp
+                        @foreach ($notice as $item)
+                        @php
+                        @endphp
+                        <div class="hitem"><a href="{{route('exam-notice',$item->slug)}}"> {{isset($item->title) ? $item->title : ''}}</a></div>
+                            @if ($i==5)
+                              @php
+                                break;
+                              @endphp
                         @endif
-                        @endforeach
-                        @endif
-                       @endif
-                     @endforeach
                     @endforeach
                       
                       </div>

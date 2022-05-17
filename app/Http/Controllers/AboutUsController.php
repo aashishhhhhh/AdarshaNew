@@ -106,12 +106,12 @@ class AboutUsController extends Controller
 
     public function storeDetail(Request $request, MediaHelper $mediaHelper)
     {
-
         $data= $request->validate([ 
             'name.*'=>'required',
             'designation.*'=>'required',
             'photo.*'=>'required',
-            'position'=>'required'
+            'position.*'=>'required',
+            'contact_no.*'=>'sometimes'
         ]);
 
         $members= Page::query()->where('page_id',$request->aboutUsId)->with('pictures')->get();
@@ -127,6 +127,9 @@ class AboutUsController extends Controller
                 $data['name']=$request->name[$key];
                 $data['designation']=$request->designation[$key];
                 $data['position']=$request->position[$key];
+                if ($request->has('contact_no')) {
+                    $data['contact_no']=$request->contact_no[$key];
+                }
                 if (array_key_exists('photo',$request->all())) {
                     if (array_key_exists($key,$request->photo)) {
                     $id=Page::create([
@@ -185,6 +188,9 @@ class AboutUsController extends Controller
                  $data['name']=$request->name[$key];
                  $data['designation']=$request->designation[$key];
                  $data['position']=$request->position[$key];
+                 if ($request->has('contact_no')) {
+                    $data['contact_no']=$request->contact_no[$key];
+                }
                  if (array_key_exists('photo',$request->all())) {
                      if (array_key_exists($key,$request->photo)) {
                      $id=Page::create([

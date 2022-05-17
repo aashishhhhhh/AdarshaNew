@@ -43,28 +43,31 @@
         
          @if($aboutus!="")
          @foreach ($aboutus->pages as $key=> $values)
-        <tr>
-            @php
-              $value=json_decode($values->content,true);
-            @endphp
-            <td>{{$key+1}}</td>
-        <td>{{$value['title']}}</td>
-            
-        <form action="{{ route('aboutus.destroy',$values->id) }}" method="POST" class="d-none">
-            @method('DELETE')
-            @csrf
-            <td>
-                <a href="{{route('aboutus.edit',$values->id)}}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit </a>
-                <button class="btn btn-primary" ><i class="fas fa-trash-alt"></i>Delete</button>   
-                @if ($value['title']!='INSTITUIONAL OVERVIEW' && $value['title']!='OUR MISSION')
-                <a href="{{route('aboutus.addDetail',$values->id)}}" class="btn btn-primary"> Add Detail </a>
-                <a href="{{route('aboutus.showDetail',$values->id)}}" class="btn btn-primary"> Show Detail </a>
-                @endif
+        @if ($values->title!='BOARD MEMBERS')
+            <tr>
+                @php
+                $value=json_decode($values->content,true);
+                @endphp
+                <td>{{$key+1}}</td>
+            <td>{{$value['title']}}</td>
+                
+            <form action="{{ route('aboutus.destroy',$values->id) }}" method="POST" class="d-none">
+                @method('DELETE')
+                @csrf
+                <td>
+                    <a href="{{route('aboutus.edit',$values->id)}}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit </a>
+                    <button class="btn btn-primary" ><i class="fas fa-trash-alt"></i>Delete</button>   
+                    @if ($value['title']!='INSTITUIONAL OVERVIEW' && $value['title']!='OUR MISSION')
+                    <a href="{{route('aboutus.addDetail',$values->id)}}" class="btn btn-primary"> Add Detail </a>
+                    <a href="{{route('aboutus.showDetail',$values->id)}}" class="btn btn-primary"> Show Detail </a>
+                    @endif
 
-            </td>
-        </form>
+                </td>
+            </form>
 
-        </tr>
+            </tr>
+        @endif
+
         @endforeach
         @endif   
 
