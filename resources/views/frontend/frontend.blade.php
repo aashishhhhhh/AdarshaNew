@@ -39,7 +39,7 @@
 
                         </div>
                     </div>
-                    <div class="view-all">
+                    {{-- <div class="view-all">
                         @foreach ($pages as $item)
                             @foreach ($item->pages as $item)
                                 @if ($item->slug == 'exam')
@@ -47,7 +47,7 @@
                                 @endif
                             @endforeach
                         @endforeach
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
         <section id="home">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="left-box">
                             <!-- slider  -->
 
@@ -92,7 +92,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="right-box">
                             <div class="organization_structure">
                                 <h4 class="organization_structure_title">
@@ -144,8 +144,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </section>
@@ -155,7 +153,7 @@
             <div class="container">
                 <div class="row">
                     <!-- left box -->
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="left-box">
 
                             <div class="voiceofpricipal">
@@ -186,7 +184,7 @@
                                                         @endisset
                                                     </div>
                                                     <a href="{{ route('program.slug', $item->slug) }}">
-                                                        <br> Read More..</a>
+                                                        Read More..</a>
                                                 </div>
                                             </div>
 
@@ -199,27 +197,62 @@
 
 
                             </div>
+
+                            {{-- Second Section --}}
+                            {{-- <div class="row">
+                                <div class="col-md-12">
+                                    <div class="front_result">
+                                        <h4 class="front_result_title"> Result </h4>
+                                        <div class="front_result_body">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> --}}
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="right-box">
-                            <div class="facebook-page">
-                                <!-- <h4> Facebook Page</h4> -->
-                                <div class="fb-page"
-                                    data-href="https://www.facebook.com/Adarsha-Secondary-School-Biratnagar-7-Admin-104689884201666/"
-                                    data-tabs="" data-width="" data-height="200" data-small-header="false"
-                                    data-adapt-container-width="true" data-hide-cover="false"
-                                    data-show-facepile="false">
-                                    <blockquote
-                                        cite="https://www.facebook.com/Adarsha-Secondary-School-Biratnagar-7-Admin-104689884201666/"
-                                        class="fb-xfbml-parse-ignore">
-                                        <a
-                                            href="https://www.facebook.com/Adarsha-Secondary-School-Biratnagar-7-Admin-104689884201666/">Adarsha
-                                            Secondary School Biratnagar-7 Admin</a>
-                                    </blockquote>
+                            {{-- Important Link --}}
+                            <div class="important_link">
+                                <h4 class="important_link_title"> Important Links </h4>
+                                <div class="important_link_body">
+                                    <ul>
+                                        @foreach ($pages as $key => $page)
+                                            @if ($page->slug == 'link')
+                                                @foreach ($page->pages as $key => $value)
+                                                    @php
+                                                        $content = json_decode($value->content);
+                                                    @endphp
+                                                    <li><a target="_blank" href="{{ $content->link }}"> <i
+                                                                class="fa-solid fa-angles-right"></i> <span>
+                                                                {{ $content->title }}</span></a></li>
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+
+                                    </ul>
                                 </div>
                             </div>
-                            {{-- @include('frontend.layout.gallery') --}}
+
+                            {{-- Articale --}}
+                            {{-- <div class="side_article">
+                                <h4 class="side_article_title">
+                                    Articles
+                                </h4>
+                                <div class="side_article_body">
+                                    <div class="side_article_item">
+                                        <img src="{{ asset('assets/images/banner001.jpg') }}" alt=""
+                                            class="article_img">
+                                        <div class="article_content">
+                                            <h5> Article Title</h5>
+                                            <span> Apr 26, 2022</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> --}}
+
+                            @include('frontend.layout.gallery')
 
                         </div>
                     </div>

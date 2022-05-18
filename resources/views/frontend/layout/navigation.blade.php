@@ -1,78 +1,82 @@
 <nav>
     <div class="container">
-      <div id="cssmenu">
-        <ul>
-          @php
-       
-          @endphp
-     
-          @foreach ($pages as $item)
-          @if ($item->show_on_homepage==1)
-          <li >
-            @if ($item->title=='HOME')
-            <a href="{{url($item->slug)}}">{{$item->title}}</a>
-            @else
-            @if ($item->title=='CONTACT US')
-            <a href="{{url($item->slug)}}">{{$item->title}}</a>
-            @else
-             @if ($item->title=='RESULT')
-            <a href="{{url($item->slug)}}">{{$item->title}}</a>
-            @else
-            @if ($item->title=='DOWNLOADS')
-            <a href="{{url($item->slug)}}">{{$item->title}}</a>
-            @else
-            @if ($item->title=='ARTICLE')
-            <a href="{{url($item->slug)}}">{{$item->title}}</a>
-            @else
-            @if ($item->title=='NOTICE BOARD')
-            <a href="{{url($item->slug)}}">{{$item->title}}</a>
-            @else
-            @if ($item->title=='ALUMNI')
-            <a href="{{url($item->slug)}}">{{$item->title}}</a>
-            @else
-            <a href="#">{{$item->title}}  </a>
-            @endif
-            @endif
-            @endif
-            @endif
-            @endif
-            @endif
-            @endif
-
-            
+        <div id="cssmenu">
             <ul>
-              @if ($item->title!=='RESULT' && $item->title!='DOWNLOADS' && $item->title!='CONTACT US' && $item->title!='ARTICLE' && $item->title!='NOTICE BOARD' && $item->title!='ALUMNI'  )
-                  
-              @foreach ($item->pages as $value)
-              @php
-              @endphp
-              @if ($value->id!=14)
-              @php
-                //  $conten=json_decode();
-              @endphp
-              <li>
-               @if ($value->slug!='technical' && $value->slug!='non-technical')
-                <a href="{{route('program.slug',$value->slug)}}"> {{$value->title}}</a>
-                @else
-                <a href="#"> {{$value->title}}  </a>
-                <ul>
-                  @if ($value->Parents!=null)
-                  @foreach ($value->Parents as $item)
-                  @php
-                    $content=json_decode($item->content);
-                    // dd($content);
-                  @endphp
-                  @if ($item->slug=='school')
-                  <li><a href="{{route('program.slug',$item->slug)}}"> {{isset($item->title) ? $item->title : ''}}</a></li>
-                  @else
-                  <li><a href="{{route('program.slug',$item->slug)}}"> {{isset($item->title) ? $item->title : ''}}</a></li>
+                @php
+                    
+                @endphp
 
-                  @endif
+                @foreach ($pages as $item)
+                    @if ($item->show_on_homepage == 1)
+                        <li>
+                            @if ($item->title == 'HOME')
+                                <a href="{{ url($item->slug) }}" class="active">{{ $item->title }}</a>
+                            @else
+                                @if ($item->title == 'CONTACT US')
+                                    <a href="{{ url($item->slug) }}">{{ $item->title }}</a>
+                                @else
+                                    @if ($item->title == 'RESULT')
+                                        <a href="{{ url($item->slug) }}">{{ $item->title }}</a>
+                                    @else
+                                        @if ($item->title == 'DOWNLOADS')
+                                            <a href="{{ url($item->slug) }}">{{ $item->title }}</a>
+                                        @else
+                                            @if ($item->title == 'ARTICLE')
+                                                <a href="{{ url($item->slug) }}">{{ $item->title }}</a>
+                                            @else
+                                                @if ($item->title == 'NOTICE BOARD')
+                                                    <a href="{{ url($item->slug) }}">{{ $item->title }}</a>
+                                                @else
+                                                    @if ($item->title == 'ALUMNI')
+                                                        <a href="{{ url($item->slug) }}">{{ $item->title }}</a>
+                                                    @else
+                                                        <a href="#">{{ $item->title }} </a>
+                                                    @endif
+                                                @endif
+                                            @endif
+                                        @endif
+                                    @endif
+                                @endif
+                            @endif
 
-                  @endforeach
-                  @endif
 
-                  {{-- <li><a href="d-civil.html"> D-CIVIL </a></li>
+                            <ul>
+                                @if ($item->title !== 'RESULT' && $item->title != 'DOWNLOADS' && $item->title != 'CONTACT US' && $item->title != 'ARTICLE' && $item->title != 'NOTICE BOARD' && $item->title != 'ALUMNI')
+                                    @foreach ($item->pages as $value)
+                                        @php
+                                        @endphp
+                                        @if ($value->id != 14)
+                                            @php
+                                                //  $conten=json_decode();
+                                            @endphp
+                                            <li>
+                                                @if ($value->slug != 'technical' && $value->slug != 'non-technical')
+                                                    <a href="{{ route('program.slug', $value->slug) }}">
+                                                        {{ $value->title }}</a>
+                                                @else
+                                                    <a href="#"> {{ $value->title }} </a>
+                                                    <ul>
+                                                        @if ($value->Parents != null)
+                                                            @foreach ($value->Parents as $item)
+                                                                @php
+                                                                    $content = json_decode($item->content);
+                                                                    // dd($content);
+                                                                @endphp
+                                                                @if ($item->slug == 'school')
+                                                                    <li><a
+                                                                            href="{{ route('program.slug', $item->slug) }}">
+                                                                            {{ isset($item->title) ? $item->title : '' }}</a>
+                                                                    </li>
+                                                                @else
+                                                                    <li><a
+                                                                            href="{{ route('program.slug', $item->slug) }}">
+                                                                            {{ isset($item->title) ? $item->title : '' }}</a>
+                                                                    </li>
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+
+                                                        {{-- <li><a href="d-civil.html"> D-CIVIL </a></li>
                   <li><a href="pre-diploma.html"> PRE-DIPLOMA </a></li>
                   <li>
                     <a href="appentiship-24-months.html">
@@ -84,17 +88,16 @@
                       SHORT TERM TRAINING
                     </a>
                   </li> --}}
-                </ul>
+                                                    </ul>
+                                                @endif
 
-                @endif
-              
-                
-              </li>
-              @endif
-              @endforeach
-              @endif
 
-              {{-- <li>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                @endif
+
+                                {{-- <li>
                 <a href="overview.html"> INSTITUTIONAL OVERVIEW (HISTORY) </a>
               </li>
               <li>
@@ -106,12 +109,12 @@
               <li>
                 <a href="staff-directories.html"> STAFF DIRECTORIES </a>
               </li> --}}
-            </ul>
-          </li>
-          @endif
-          @endforeach
+                            </ul>
+                        </li>
+                    @endif
+                @endforeach
 
-          {{-- <li class="active">
+                {{-- <li class="active">
             <a href="#">FACULTIES</a>
             <ul>
               <li>
@@ -170,7 +173,7 @@
             </ul>
           </li>
           <li><a href="contact.html">Contact</a></li> --}}
-        </ul>
-      </div>
+            </ul>
+        </div>
     </div>
-  </nav>
+</nav>
