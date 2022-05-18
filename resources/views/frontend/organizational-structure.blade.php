@@ -17,6 +17,30 @@
                       <h4 class="page-title"> {{isset($program->title) ? $program->title : ''}} </h4>
                       <div class="page-body">
                           <p> {!!$content->content!!}</p>
+                          <table class="table mt-5">
+                          <thead class="bg text-light">
+                            <tr>
+                              <th scope="col">Photo</th>
+                              <th scope="col">Name </th>
+                              <th scope="col">Designation</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+
+                            @foreach ($paginations as $item)
+                            @php
+                                    $data=json_decode($item->content);
+                                @endphp
+                            <tr>
+                              <td><img src="{{ asset('storage/upload/' . $item->pictures[0]->url) }}" alt=""
+                                class="px-1" width="100"></td>
+                              <td>{{isset($data->name) ? $data->name : ''}}</td>
+                              <td>{{isset($data->designation) ? $data->designation : ''}}</td>
+                            </tr>
+                            @endforeach
+                          </tbody>
+                        </table>
+                        {{ $paginations->links() }}
                       </div>
                   </div>
               </div>
