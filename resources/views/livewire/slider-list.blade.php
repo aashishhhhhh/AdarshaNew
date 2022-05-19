@@ -47,7 +47,6 @@
             </tr>
             </thead>
             <tbody>
-                @dd($slider);
                 @if ($slider != '' && $slider->pictures->count() > 0)
     
                 <tr>

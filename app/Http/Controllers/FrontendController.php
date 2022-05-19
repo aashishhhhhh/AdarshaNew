@@ -61,14 +61,28 @@ class FrontendController extends Controller
             ]);
         }
 
-        if ($slug == 'notice-board' || $slug == 'result' || $slug == 'downloads') {
+
+        if ($slug == 'notice-board' || $slug == 'result' || $slug == 'downloads' || $slug == 'alumni') {
             $temp = PageType::query()->where('slug', $slug)->first();
             if ($temp != null) {
-                $datas = Page::query()
-                    ->where('page_type_id', $temp->id)
-                    ->with('pictures', 'Parents.pictures')
-                    ->orderBy('id', 'DESC')
-                    ->paginate(4);
+
+                if ($slug == 'alumni') {
+                    $datas = Page::query()
+                        ->where('page_type_id', $temp->id)
+                        ->with('pictures', 'Parents.pictures')
+                        ->orderBy('id', 'DESC')
+                        ->where('is_approved', 1)
+                        ->paginate(4);
+                } else {
+
+                    $datas = Page::query()
+                        ->where('page_type_id', $temp->id)
+                        ->with('pictures', 'Parents.pictures')
+                        ->orderBy('id', 'DESC')
+                        ->paginate(4);
+                }
+
+
 
                 return view('frontend.' . $slug, [
                     'pages' => $this->pages->load('pages.pictures', 'pages.Parents'),

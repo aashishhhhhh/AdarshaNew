@@ -1,88 +1,86 @@
 @include('frontend.layout.header')
-    <!-- Navigation -->
-   @include('frontend.layout.navigation')
+<!-- Navigation -->
+@include('frontend.layout.navigation')
 <main class="container">
     <div class="main-body">
         @php
-        
-
-           $content=json_decode($program->content);
-          
-
-        
+            
+            $content = json_decode($program->content);
+            
         @endphp
-      <!-- section two -->
-      <section id="page">
-        <div class="container">
-          <div class="row">
-            <!-- left box -->
-            <div class="col-md-8">
-              <div class="left-box">
-                  <div class="page">
-                      <h4 class="page-title"> {{isset($program->title) ? $program->title : ''}} </h4>
-                      <div class="page-body">
-                          <p> {!!$content->content!!}</p>
-                          <table class="table mt-5">
-                              <thead class="bg text-light">
-                                <tr>
-                                  <th scope="col">Photo</th>
-                                  <th scope="col">Name </th>
-                                  <th scope="col">Designation</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                @foreach ($program->Parents as $item)
-                                    @php
-                                        $data=json_decode($item->content);
-                                    @endphp
-                                <tr>
-                                  {{-- {{isset($item->pictures[0])) ? $item->pictures[0]) : ''}} --}}
-                                  <td><img src="{{ asset('storage/upload/' . $item->pictures[0]->url) }}" alt=""
-                                    class="px-1" width="100"></td>
-                                  <td>{{isset($data->name) ? $data->name : ''}}</td>
-                                  <td>{{isset($data->Designation) ? $data->Designation : ''}}</td>
-                                </tr>
-                                @endforeach
-
-                               
-                              </tbody>
-                            </table>
-                            
-                            
-                      </div>
-                  </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="right-box">
-                <div class="facebook-page">
-                  <!-- <h4> Facebook Page</h4> -->
-                  <div class="fb-page" data-href="https://www.facebook.com/Adarsha-Secondary-School-Biratnagar-7-Admin-104689884201666/" data-tabs="" data-width="" data-height="200" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/Adarsha-Secondary-School-Biratnagar-7-Admin-104689884201666/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Adarsha-Secondary-School-Biratnagar-7-Admin-104689884201666/">Adarsha Secondary School Biratnagar-7 Admin</a></blockquote></div>
-                </div>
-                <div class="photo-gallery">
-                  <h4> Photo Gallery  </h4>
-                  <!-- <div class="gallery"> -->
-                    <div class="owl-carousel gallery owl-theme">
-                      <div class="item">
-                        <a href="{{  url('/program/photo-gallery') }}"><img src="{{ asset("assets/images/banner002.jpg") }}" alt="Gallery Image"></a>
-                      </div>
-                      <div class="item">
-                        <a  href="{{  url('/program/photo-gallery') }}"><img src="{{ asset("assets/images/banner002.jpg") }}" alt="Gallery Image"></a>
-                      </div>
+        <!-- section two -->
+        <section id="page">
+            <div class="container">
+                <div class="row">
+                    <!-- left box -->
+                    <div class="col-md-9">
+                        <div class="left-box">
+                            <div class="page">
+                                <h4 class="page-title"> {{ isset($program->title) ? $program->title : '' }} </h4>
+                                <div class="page-body">
+                                    <p> {!! $content->content !!}</p>
+                                    <div class="row" id="team">
+                                    <!-- Team member -->
+                                    @foreach ($paginations as $item)
+                                        @php
+                                            $data = json_decode($item->content);
+                                        @endphp
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <div class="image-flip">
+                                                <div class="mainflip flip-0">
+                                                    <div class="frontside">
+                                                        <div class="card">
+                                                            <div class="card-body text-center">
+                                                                <p><img class=" img-fluid"
+                                                                        src="{{ asset('storage/upload/' . $item->pictures[0]->url) }}"
+                                                                        alt="card image"></p>
+                                                                <h4 class="card-title">
+                                                                    {{ isset($data->name) ? $data->name : '' }}
+                                                                </h4>
+                                                                <p class="card-text">
+                                                                    {{ isset($data->designation) ? $data->designation : '' }}
+                                                                </p>
+                                                
+                                                                {{-- <a href="https://www.fiverr.com/share/qb8D02"
+                                                                    class="btn btn-primary btn-sm"><i
+                                                                        class="fa fa-plus"></i></a> --}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="backside">
+                                                        <div class="card">
+                                                            <div class="card-body text-center mt-4">
+                                                                <h4 class="card-title">
+                                                                    {{ isset($data->name) ? $data->name : '' }}
+                                                                </h4>
+                                                                <p class="card-text">
+                                                                    {{ isset($data->designation) ? $data->designation : '' }}
+                                                                </p>
+                                                                 <p class="card-text">
+                                                                    {{ isset($data->contact_no) ? $data->contact_no : '' }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        @if (count($paginations) > 0)
+                        {{$paginations->links()}}   
+                        @endif
                     </div>
-                  <!-- </div> -->
+                    <div class="col-md-3">
+                        @include('frontend.layout.sidebar')
+
+                    </div>
                 </div>
-                <div class="video-gallery">
-                  <h4> Video Gallery </h4>
-                  <iframe width="100%" height="200" src="https://www.youtube.com/embed/lZ3p8qYvZws">
-                  </iframe>
-                </div>
-                
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
+        </section>
     </div>
-  </main>
-  @include('frontend.layout.footer')
+</main>
+@include('frontend.layout.footer')

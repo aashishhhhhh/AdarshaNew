@@ -21,6 +21,7 @@
                         <th class="text-center">{{ __(' Name') }}</th>
                         <th class="text-center">{{ __(' Designation') }}</th>
                         <th class="text-center">{{ __(' Position') }}</th>
+                        <th class="text-center">{{ __(' Contact no') }}</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -47,6 +48,10 @@
                        
                         <td class="text-center">
                             <input name="position[]" id="position1"  class="form-control-sm form-control" >
+                        </td>
+
+                        <td class="text-center">
+                            <input name="contact_no[]" id="contact_no1"  class="form-control-sm form-control" >
                         </td>
 
                         <td>
@@ -102,6 +107,10 @@
                 '<input name="position[]" id="position'+i+'"  class="form-control-sm form-control" >' +
                 '</td>' +
 
+                '<td class="text-center">' +
+                '<input name="contact_no[]" id="contact_no'+i+'"  class="form-control-sm form-control" >' +
+                '</td>' +
+
                 '<td><i class="fas fa-trash-alt text-danger" onclick="removeBank(' + i +
                 ')"></i></td>' +
                 '</tr>';
@@ -135,11 +144,14 @@
                     }).then(function(response){
                         console.log(response.data.content);
                         const obj = JSON.parse(response.data.content);
+                        console.log(obj);
                         var designation=obj.designation;
                         var name = obj.name;
                         var position = obj.position;
+                        var contact_no = obj.contact_no;
                         $('#position'+i).val(position);
                         $('#designation'+i).val(designation);
+                        $('#contact_no'+i).val(contact_no);
                     })
             }
 

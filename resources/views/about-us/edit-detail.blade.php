@@ -43,7 +43,15 @@
                 <input type="text" name="position" value="{{$aboutus->position}}"  class="form-control" id="exampleInputEmail1" placeholder="Enter Designation"  >
                 @endif
     
-                </div>
+        </div>
+
+        <label>  Contact no </label> 
+        <div class="form-group">
+                <input type="text" name="contact_no" value="{{$content->contact_no}}"  class="form-control" id="exampleInputEmail1">
+    
+        </div>
+
+        
         <hr>
     </div>
    
